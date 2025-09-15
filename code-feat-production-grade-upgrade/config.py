@@ -52,7 +52,11 @@ def load_config() -> dict:
         fee_config = load_yaml_config('fees.yml')
         config['arbitrage'] = {
             'threshold': 0.2,  # Default threshold, will be overridden by session state in UI
-            'fees': fee_config
+            'fees': fee_config,
+            'default_symbols': {
+                'bridge': 'BTC.BTC/ETH.ETH',
+                'dex': 'WETH/USDC'
+            }
         }
 
         # --- Qualitative Data ---

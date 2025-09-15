@@ -96,12 +96,13 @@ def get_providers(_config, _session_state):
 
     return providers
 
-def init_session_state():
-    """Initializes the session state with default values."""
+def init_session_state(config):
+    """Initializes the session state with default values from the config."""
+    default_symbols = config.get('arbitrage', {}).get('default_symbols', {})
     if 'bridge_symbol' not in st.session_state:
-        st.session_state.bridge_symbol = 'BTC.BTC/ETH.ETH'
+        st.session_state.bridge_symbol = default_symbols.get('bridge', 'BTC.BTC/ETH.ETH')
     if 'dex_symbol' not in st.session_state:
-        st.session_state.dex_symbol = 'WETH/USDC'
+        st.session_state.dex_symbol = default_symbols.get('dex', 'WETH/USDC')
     if 'api_keys' not in st.session_state:
         st.session_state.api_keys = {}
     if 'selected_exchanges' not in st.session_state:
@@ -110,7 +111,7 @@ def init_session_state():
 # --- Main App Logic ---
 def main():
     config = get_config()
-    init_session_state()
+    init_session_state(config)
 
     # The sidebar must be rendered first to initialize all its widgets and session state keys
     sidebar_controls()

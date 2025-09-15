@@ -94,7 +94,7 @@ async def test_find_opportunities_calculates_profit_correctly():
     # Profit Percentage:
     #   (394.5 / 50050.0) * 100 = ~0.788%
 
-    assert op['potential_profit_usd'] == pytest.approx(394.5)
+    assert op['net_profit_usd'] == pytest.approx(394.5)
     assert op['profit_percentage'] == pytest.approx(0.7882, abs=1e-4)
 
 
